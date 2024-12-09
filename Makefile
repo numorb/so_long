@@ -6,7 +6,7 @@
 #    By: blnunez- <blnunez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 14:30:42 by blnunez-          #+#    #+#              #
-#    Updated: 2024/12/06 23:09:58 by blnunez-         ###   ########.fr        #
+#    Updated: 2024/12/09 20:23:33 by blnunez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ SRCDIR:= src
 INCDIR:= include
 OBJDIR:= bin
 
-SRC:= so_long.c
+SRC:=	so_long.c \
+		key_mapping.c \
+		map_mapping.c
 OBJS:=$(SRC:%.c=$(OBJDIR)/%.o)
 
 LIBFT:= libs/libft/libft.a

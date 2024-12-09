@@ -6,7 +6,7 @@
 /*   By: blnunez- <blnunez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:36:34 by blnunez-          #+#    #+#             */
-/*   Updated: 2024/12/08 23:50:25 by blnunez-         ###   ########.fr       */
+/*   Updated: 2024/12/09 21:27:31 by blnunez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ typedef struct s_object_type
     t_object    *collectables;
     t_object    *enemies;
     t_object    exit;
-    // int         num_collectibles;
-    // int         num_enemies;
 }               t_object_type;
 
 typedef struct  s_map
@@ -73,6 +71,13 @@ typedef struct  s_map
     t_size      size;
     char        **mapping;
 }               t_map;
+
+typedef struct  s_object_handler
+{
+    char object_char;
+    void (*position_handler)(t_game *game, t_position pos);
+    void (*count_incrementer)(t_game *game);
+}               t_object_handler;
 
 typedef struct      s_game
 {
@@ -83,10 +88,16 @@ typedef struct      s_game
     t_object_type   character;
     int             steps;
     t_map           map;
+    t_object_handler *object_handlers;
+    int             num_handlers;   
 }                   t_game;
 
 
-int close_handler(t_game *game);
-int key_handler(int key, t_game *game);
+int         key_handler(int key, t_game *game);
+int         close_handler(t_game *game);
+char        load_map(char *file, char *mem_map);
+ssize_t     get_map_size(char *file);
+int         maps(char *file, t_map *map);
+
 
 #endif
