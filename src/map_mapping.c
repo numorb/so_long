@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapping.c                                          :+:      :+:    :+:   */
+/*   map_mapping.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: blnunez- <blnunez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 20:19:57 by blnunez-          #+#    #+#             */
-/*   Updated: 2024/12/09 20:20:36 by blnunez-         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:50:06 by blnunez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char    load_map(char *file, char *mem_map)
+int    load_map(char *file, char *mem_map)
 {
     int     fd;
     ssize_t buffer_size;
@@ -20,9 +20,9 @@ char    load_map(char *file, char *mem_map)
     char    buffer[4096];
     
     fd = open(file, O_RDONLY);
-    total_size = 0;
     if (fd < 0)
         return (-1);
+    total_size = 0;
     buffer_size = read(fd, buffer, 4096);
     while (buffer_size > 0)
     {
@@ -64,7 +64,6 @@ int     maps(char *file, t_map *map)
 {
     ssize_t total_size;
     char    *mem_map;
-    int     width;
     int     height;
     
     height = 0;
@@ -78,15 +77,14 @@ int     maps(char *file, t_map *map)
     load_map(file, mem_map);
     map->mapping = ft_split(mem_map, '\n');
     free(mem_map);
-    width = ft_strlen(map->mapping[0]);
+    map->size.width = ft_strlen(map->mapping[0]);
     while (map->mapping[height])
     {
         printf("%s\n", map->mapping[height]);
-        if ((int)ft_strlen(map->mapping[height]) != width)
-            return (1);
-        height++;
+        // if ((int)ft_strlen(map->mapping[height]) != map->size.width)
+        //     return (1);
+        ++height;
     }
-    map->size.width = width;
     map->size.height = height;
     return (0);
 }

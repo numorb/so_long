@@ -6,7 +6,7 @@
 #    By: blnunez- <blnunez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 14:30:42 by blnunez-          #+#    #+#              #
-#    Updated: 2024/12/09 20:23:33 by blnunez-         ###   ########.fr        #
+#    Updated: 2024/12/11 03:30:35 by blnunez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ OBJDIR:= bin
 
 SRC:=	so_long.c \
 		key_mapping.c \
-		map_mapping.c
+		map_mapping.c \
+		types_mapping.c \
+		flood_fill.c
 OBJS:=$(SRC:%.c=$(OBJDIR)/%.o)
 
 LIBFT:= libs/libft/libft.a
