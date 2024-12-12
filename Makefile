@@ -6,7 +6,7 @@
 #    By: blnunez- <blnunez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 14:30:42 by blnunez-          #+#    #+#              #
-#    Updated: 2024/12/11 03:30:35 by blnunez-         ###   ########.fr        #
+#    Updated: 2024/12/12 02:00:21 by blnunez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,12 @@ SRC:=	so_long.c \
 		key_mapping.c \
 		map_mapping.c \
 		types_mapping.c \
-		flood_fill.c
+		flood_fill.c \
+		draw_objects.c \
+		drawing.c \
+		images.c \
+		game.c \
+		object_handlers.c
 OBJS:=$(SRC:%.c=$(OBJDIR)/%.o)
 
 LIBFT:= libs/libft/libft.a
@@ -39,7 +44,9 @@ else
 endif
 LDLIBS:= -lmlx -lft -lX11 -lXext -lm
 
-.PHONY: all clean fclean re debug
+BAD_MAPS := $(wildcard maps/bad_maps/*)
+
+.PHONY: all clean fclean re debug test
 
 all: $(NAME)
 
@@ -70,3 +77,5 @@ $(LIBMLX):
 		$(MAKE) -C libs/minilibx-linux; \
 	fi
 
+test:
+	-$(foreach map, $(BAD_MAPS), ./$(NAME) $(map) && echo "Should have failed";)

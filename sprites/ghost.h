@@ -1,6 +1,6 @@
 #include <stdint.h>
 
-#define GHOST_FRAME_COUNT 6
+#define GFC 6
 #define GHOST_FRAME_WIDTH 32
 #define GHOST_FRAME_HEIGHT 32
 
