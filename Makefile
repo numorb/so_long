@@ -72,7 +72,7 @@ $(LIBFT):
 	$(MAKE) -C libft
 
 $(LIBMLX):
-	@if[ "$(UNAME)" == "Darwin" ]; then \
+	@if [ "$(UNAME)" == "Darwin" ] ; then \
 		$(MAKE) -C libs/minilibx_mms; \
 	else \
 		$(MAKE) -C libs/minilibx-linux; \
