@@ -6,7 +6,7 @@
 #    By: blnunez- <blnunez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 14:30:42 by blnunez-          #+#    #+#              #
-#    Updated: 2024/12/12 02:00:21 by blnunez-         ###   ########.fr        #
+#    Updated: 2024/12/12 02:52:55 by blnunez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ CC:=	cc
 CFLAGS:= -Wall -Wextra -Werror
 debug: CFLAGS += -ggdb3
 
+UNAME := $(shell uname)
 ifeq ($(UNAME), Darwin)
 	LIBMLX:= libs/minilibx_mms/libmlx.a
 	CPPFLAGS:= -I ./libs/minilibx_mms -I ./libs/libft -I ./$(INCDIR)
@@ -71,7 +72,7 @@ $(LIBFT):
 	$(MAKE) -C libft
 
 $(LIBMLX):
-	@if[($(UNAME), Darwin)]; then \
+	@if[ "$(UNAME)" == "Darwin" ]; then \
 		$(MAKE) -C libs/minilibx_mms; \
 	else \
 		$(MAKE) -C libs/minilibx-linux; \

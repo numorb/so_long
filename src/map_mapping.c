@@ -6,7 +6,7 @@
 /*   By: blnunez- <blnunez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 20:19:57 by blnunez-          #+#    #+#             */
-/*   Updated: 2024/12/12 01:47:35 by blnunez-         ###   ########.fr       */
+/*   Updated: 2024/12/12 03:22:33 by blnunez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	map_checker(t_map *map)
 			if ((j == 0 || j == map->size.width - 1 || i == 0 || \
 			i == map->size.height - 1) && map->mapping[i][j] != '1')
 			{
-				ft_printf("Error\nEnter a map surrounded/closed by walls.\n");
+				ft_printf("Error\nEnter a rectangular map closed by walls\n");
 				return (1);
 			}
 			else
@@ -94,7 +94,7 @@ int	maps(char *file, t_map *map)
 	height = 0;
 	total_size = get_map_size(file);
 	if (total_size < 0)
-		return (1);
+		return (ft_printf("Error\nWrong map.\n"), 1);
 	mem_map = (char *)malloc((total_size + 1) * sizeof(char));
 	if (!mem_map)
 		return (-1);

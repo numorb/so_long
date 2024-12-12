@@ -6,30 +6,30 @@
 /*   By: blnunez- <blnunez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 01:57:45 by blnunez-          #+#    #+#             */
-/*   Updated: 2024/12/12 01:58:10 by blnunez-         ###   ########.fr       */
+/*   Updated: 2024/12/12 03:21:05 by blnunez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	game_over(t_game *game, int frame)
+void	game_over(t_game *game, int *frame)
 {
 	if (game->game_over == 1 || game->game_over == -1)
-		frame = 0;
+		*frame = 0;
 	if (game->game_over < 0)
 	{
 		game->game_over--;
 		obj2screen(game, &game->character.player, 1, \
 			game->character.player.pos[0]);
 		game->character.player.img[1]->buffer = ((char *) \
-			pacman_dead_data[(frame / FRATE) % PACMAN_DEAD_FRAME_COUNT]);
-		if (frame / FRATE < PACMAN_DEAD_FRAME_COUNT - 1)
-			frame++;
+			pacman_dead_data[(*frame / FRATE) % PACMAN_DEAD_FRAME_COUNT]);
+		if (*frame / FRATE < PACMAN_DEAD_FRAME_COUNT - 1)
+			(*frame)++;
 	}
 	else
 	{
 		game->game_over++;
-		frame++;
+		(*frame)++;
 	}
 	if (game->game_over < -10 * FRATE || game->game_over > 10 * FRATE)
 		close_handler(game);
@@ -52,7 +52,7 @@ int	game_loop(t_game *game)
 	}
 	draw_enemies(game, frame, game->game_over);
 	if (game->game_over != 0)
-		game_over(game, frame);
+		game_over(game, &frame);
 	mlx_put_image_to_window(game->mlx, game->win, game->screen.img, 0, 0);
 	draw_info(game);
 	return (0);
@@ -70,10 +70,7 @@ int	init_game(t_game *game, char **argv)
 	}
 	mlx_get_screen_size(game->mlx, &max_size.width, &max_size.height);
 	if (maps(argv[1], &game->map))
-	{
-		ft_printf("Error\nWrong map.\n");
 		return (1);
-	}
 	if (game->map.size.width * TILE > max_size.width || \
 	game->map.size.height * TILE > max_size.height)
 		return (ft_printf("Map is too big. Go smaller or go home!"), 1);
