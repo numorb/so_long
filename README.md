@@ -6,6 +6,7 @@ You play a character who must collect every collectible on the map and reach the
 
 ![](./preview.gif)
 
+
 ## What it does
 
 - Parses and validates a map from a `.ber` file: the map must be rectangular, fully enclosed by walls, and contain exactly one player, one exit, and at least one collectible
@@ -19,7 +20,6 @@ You play a character who must collect every collectible on the map and reach the
 - Enemy patrols that end the game on contact
 - Sprite animation
 - On-screen move counter rendered in the window
--->
 
 ## What it demonstrates
 
